@@ -1,6 +1,6 @@
 import requests
 
-url = "http://localhost:9000/api/musica/"
+url = "https://musicscript.onrender.com/api/musica/"
 data = {
     "guild_id": 1077968892535775262,
     "channel_id": 1100148368996573265,
