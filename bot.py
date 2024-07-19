@@ -60,22 +60,8 @@ class MyBot(commands.Bot):
         except Exception as e:
             print(f"Error al configurar FFmpeg: {e}")
             return
-
-        def after_playing(error):
-            if error:
-                print(f"Error al reproducir: {error}")
-            else:
-                print("Reproducción terminada")
-            asyncio.run_coroutine_threadsafe(self.send_message_to_channel(channel, f"Reproducción terminada de: {url}"), self.loop)
-
-        try:
-            voice_client.play(source, after=after_playing)
-            print("Inicio de reproducción")
-        except Exception as e:
-            print(f"Error al reproducir audio: {e}")
-
-    async def send_message_to_channel(self, channel, message):
-        await channel.send(message)
+        
+        voice_client.play(source)
 
 
 
