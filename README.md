@@ -4,7 +4,7 @@
 Obten el repositorio en tus manos.
 
    - Video tutorial [click aqui](https://github.com/IzanaonYT/MusicScript/blob/main/Tutos/githubtuto.mp4)
-- **Segundos Paso**
+- **Segundo Paso**
 Obten un Host Gratuito con un subdominio para que el bot funcione correctamente.
    - Video tutorial [click aqui](https://github.com/IzanaonYT/MusicScript/blob/main/Tutos/rendertuto.mp4)
    
