@@ -1,0 +1,4 @@
+fastapi
+pydantic
+youtube_search
+yt_dlp
