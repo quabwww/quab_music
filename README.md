@@ -14,6 +14,17 @@ Obten un Host Gratuito con un subdominio para que el bot funcione correctamente.
 
 
 - **Tercer Paso**
-Usa los codigos para escuchar tu musica preferida, asi de simple y gracias por ser parte de BDS World
+Usa los codigos pero recuerda ejecutarlo en un canal de voz y estar unido a este, que esperas para escuchar tu musica preferida?, asi de simple y gracias por ser parte de BDS World
 
+```python
+$onlyIf[$message!=;Escribe algo para escuchar]
+$var[dominio;]
+$var[json;{
+    "guild_id": $guildID,
+    "channel_id": $channelID,
+    "user_id": $authorID,
+    "url": "$url[encode;$message]"
+}]
+$httpPost[$var[dominio]/api/musica/;$var[json]]
+$httpResult
 ```
