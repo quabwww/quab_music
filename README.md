@@ -18,7 +18,7 @@ Usa los codigos pero recuerda ejecutarlo en un canal de voz y estar unido a este
 
 ```python
 $onlyIf[$message!=;Escribe algo para escuchar]
-$var[dominio;]
+$var[dominio; tu url de render aqui]
 $var[json;{
     "guild_id": $guildID,
     "channel_id": $channelID,
