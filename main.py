@@ -68,11 +68,12 @@ async def musica(req: Req):
 @app.get("/api/music-list/")
 async def get_queue(guild_id: int):
     import json
+    from youtube_search import YoutubeSearch
     try:
         queue = bot.get_queue(guild_id)
         list = []
         for i in queue:
-            results = search(i)
+            results = YoutubeSearch(i, max_results=1).to_dict()
             if results and "videos" in results and results["videos"]:
                 list.append(results["videos"][0])
         data = {"data": list}
