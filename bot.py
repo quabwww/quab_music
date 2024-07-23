@@ -1,4 +1,4 @@
-# bot.py
+
 
 import discord
 import yt_dlp
