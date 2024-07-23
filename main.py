@@ -63,3 +63,8 @@ async def get_queue(guild_id: int):
     op = json.dumps(data, indent=4)
 
     return Response(content=op, media_type="application/json")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app=app, host="0.0.0.0", port=9000)
+
