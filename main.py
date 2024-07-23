@@ -35,6 +35,7 @@ async def musica(req: Req):
     print(f"guild_id: {req.guild_id}, channel_id: {req.channel_id}, user_id: {req.user_id}, url: {req.url}")
     
     search_url = await search_download_return_url(req.url)
+    print(search_url)
 
     if not bot.is_user_in_voice_channel(req.guild_id, req.user_id):
        return {"message": f"¡El usuario \"{req.user_id}\" debe estar en un canal de voz para usar este comando!", "status": 400}
@@ -42,12 +43,8 @@ async def musica(req: Req):
     is_playing = bot.is_playing(req.guild_id)
     result = await bot.play(req.guild_id, req.channel_id, req.user_id, search_url)
     
-    search_results = YoutubeSearch(search_url, max_results=1).to_dict()
+    search_results = YoutubeSearch(search_url, max_results=1).to_json()
     
-    if search_results and "videos" in search_results and search_results["videos"]:
-        n = search_results["videos"][0]
-    else:
-        n = {}
 
     if result:
         message = "Reproduciendo ahora"
@@ -56,7 +53,7 @@ async def musica(req: Req):
         message = "Una canción ya está en reproducción. Se agregó la nueva canción a la lista."
         status = 201
 
-    return {"voice": True, "data": n, "message": message, "status": status}
+    return {"voice": True, "data": search_results, "message": message, "status": status}
 
 @app.get("/api/music-list/")
 async def get_queue(guild_id: int):
