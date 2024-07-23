@@ -8,7 +8,7 @@ from pydantic import BaseModel
 from youtube_search import YoutubeSearch
 import os
 import asyncio
-from Funcion.get import search_download_return_url
+from MusicScript.Funcion.get import search_download_return_url
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -33,14 +33,21 @@ def on_router():
 @app.post("/api/musica/")
 async def musica(req: Req):
     print(f"guild_id: {req.guild_id}, channel_id: {req.channel_id}, user_id: {req.user_id}, url: {req.url}")
-    search = await search_download_return_url(req.url)
+    
+    search_url = await search_download_return_url(req.url)
 
     if not bot.is_user_in_voice_channel(req.guild_id, req.user_id):
-       return {"message": f"¡El usuario \"{req.user_id}\"debe estar en un canal de voz para usar este comando!", "status": 400}
+       return {"message": f"¡El usuario \"{req.user_id}\" debe estar en un canal de voz para usar este comando!", "status": 400}
     
     is_playing = bot.is_playing(req.guild_id)
-    result = await bot.play(req.guild_id, req.channel_id, req.user_id, search)
-    n = YoutubeSearch(search, max_results=1).to_dict()
+    result = await bot.play(req.guild_id, req.channel_id, req.user_id, search_url)
+    
+    search_results = YoutubeSearch(search_url, max_results=1).to_dict()
+    
+    if search_results and "videos" in search_results and search_results["videos"]:
+        n = search_results["videos"][0]
+    else:
+        n = {}
 
     if result:
         message = "Reproduciendo ahora"
@@ -58,7 +65,8 @@ async def get_queue(guild_id: int):
     list = []
     for i in queue:
         results = YoutubeSearch(i, max_results=1).to_dict()
-        list.append(results)
+        if results and "videos" in results and results["videos"]:
+            list.append(results["videos"][0])
     data = {"data": list}
     op = json.dumps(data, indent=4)
 
@@ -67,4 +75,5 @@ async def get_queue(guild_id: int):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app=app, host="0.0.0.0", port=9000)
+
 
