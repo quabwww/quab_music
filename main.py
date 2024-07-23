@@ -8,7 +8,7 @@ from pydantic import BaseModel
 from youtube_search import YoutubeSearch
 import os
 import asyncio
-from MusicScript.Funcion.get import search_download_return_url
+from Funcion.get import search_download_return_url
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
