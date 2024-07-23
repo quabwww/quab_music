@@ -8,6 +8,7 @@ from pydantic import BaseModel
 from Funcion.otro import search
 import os
 import asyncio
+from youtube_search import YoutubeSearch
 from Funcion.get import search_download_return_url
 import json
 
@@ -67,10 +68,8 @@ async def musica(req: Req):
 
 @app.get("/api/music-list/")
 async def get_queue(guild_id: int):
-    import json
-    from youtube_search import YoutubeSearch
     try:
-        queue = bot.get_queue(guild_id)
+        queue = get_queue(guild_id)
         list = []
         for i in queue:
             results = YoutubeSearch(i, max_results=1).to_dict()
