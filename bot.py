@@ -1,4 +1,4 @@
-
+# bot.py
 
 import discord
 import yt_dlp
@@ -79,9 +79,7 @@ class MusicBot(discord.Client):
         except Exception as e:
             print(f"Error al configurar FFmpeg: {e}")
             return
-    
-    def get_queue(self, guild_id):
-        return self.queue.get(guild_id, [])
+
 
     def is_playing(self, guild_id):
         guild = self.get_guild(guild_id)
@@ -101,6 +99,9 @@ class MusicBot(discord.Client):
             return False
 
         return member.voice is not None
+    
+    def get_pending_urls(self, guild_id):
+        return self.queue.get(guild_id, [])
 
 
 
