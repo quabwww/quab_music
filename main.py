@@ -65,14 +65,14 @@ async def musica(req: Req):
 async def get_pending_urls(guild_id: int):
     try:
         pending_urls = bot.get_pending_urls(guild_id)
-        list = []
-        for i in pending_urls:
-            n = YoutubeSearch(i, max_results=1).to_dict()
-            list.append(n)
-        return JSONResponse({"guild_id": guild_id, "pending_urls": list}, status_code=200)
+        results = []
+        for url in pending_urls:
+            search_result = YoutubeSearch(url, max_results=1).to_dict()
+            results.append(search_result)
+        return {"guild_id": guild_id, "pending_urls": results}
     except Exception as e:
         print(f"Error: {e}")
-        return {"message": "Error al obtener las URLs pendientes", "status": 500, "error": str(e)}
+        raise HTTPException(status_code=500, detail="Error al obtener las URLs pendientes")
     
 @app.get("/api/youtube_info/")
 async def o(music: str):
