@@ -1,8 +1,10 @@
 # Comando Play:
 
-```js
+Por favor esperar un poco si demora.
+
+```python
 $nomention
-$var[dominio;https://musicscript.onrender.com]
+$var[dominio;tu url de render]
 
 $onlyIf[$message!=;Escribe algo para escuchar]
 
