@@ -27,5 +27,6 @@ $var[json;{
     "url": "$url[encode;$message]"
 }]
 $httpPost[$var[dominio]/api/musica/;$var[json]]
+- Codigos mas avanzados con el repositorio: [Click aqui](https://github.com/IzanaonYT/MusicScript/blob/main/Tutos/codes_bdfd.md)
 $httpResult
 ```
