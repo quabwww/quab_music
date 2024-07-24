@@ -1,5 +1,3 @@
-# main.py
-
 from bot import MusicBot
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import Response, JSONResponse
@@ -8,8 +6,8 @@ from pydantic import BaseModel
 from Funcion.otro import search
 import os
 import asyncio
-from youtube_search import YoutubeSearch
 from Funcion.get import search_download_return_url
+from youtube_search import YoutubeSearch
 import json
 
 load_dotenv()
@@ -47,9 +45,6 @@ async def musica(req: Req):
         search_url = await search_download_return_url(req.url)
         print(search_url)
 
-        t = search(search_url)
-        print(t)
-
         result = await bot.play(req.guild_id, req.channel_id, req.user_id, search_url)
 
 
@@ -60,32 +55,28 @@ async def musica(req: Req):
             message = "Una canción ya está en reproducción. Se agregó la nueva canción a la lista."
             status = 201
 
-        return JSONResponse({"voice": True, "data": t, "message": message, "status": status}, status_code=200)
+        return JSONResponse({"voice": True, "data": search_url, "message": message, "status": status}, status_code=200)
 
     except Exception as e:
         print(f"Error: {e}")
         return {"message": "Error al procesar la solicitud", "status": 500, "error": str(e)}
 
-@app.get("/api/music-list/")
-async def get_queue(guild_id: int):
+@app.get("/api/pending_urls/{guild_id}")
+async def get_pending_urls(guild_id: int):
     try:
-        queue = get_queue(guild_id)
-        list = []
-        for i in queue:
-            results = YoutubeSearch(i, max_results=1).to_dict()
-            if results and "videos" in results and results["videos"]:
-                list.append(results["videos"][0])
-        data = {"data": list}
-        op = json.dumps(data, indent=4)
-
-        return Response(content=op, media_type="application/json")
+        pending_urls = bot.get_pending_urls(guild_id)
+        return JSONResponse({"guild_id": guild_id, "pending_urls": pending_urls}, status_code=200)
     except Exception as e:
         print(f"Error: {e}")
-        return {"message": "Error al obtener la lista de reproducción", "status": 500, "error": str(e)}
+        return {"message": "Error al obtener las URLs pendientes", "status": 500, "error": str(e)}
+    
+@app.get("/api/youtube_info/")
+async def o(music: str):
+    n = YoutubeSearch(search_terms=music, max_results=1).to_dict()
+    return {"data": n}
 
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app=app, host="0.0.0.0", port=9000)
-
 
 
