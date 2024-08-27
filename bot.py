@@ -57,6 +57,7 @@ class MusicBot(discord.Client):
             'format': 'bestaudio/best',
             'noplaylist': True,
             'quiet': True,
+            'cookies': 'cookies.txt'
         }
 
         try:
