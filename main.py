@@ -56,9 +56,9 @@ async def musica(req: Req):
             message = "Una canción ya está en reproducción. Se agregó la nueva canción a la lista."
             status = 201
         
-        videosSearch = VideosSearch(req.url, limit = 2)
+        
 
-        return JSONResponse({"voice": True, "data": search_url, "message": message, "status": status, "info_extra": videosSearch.result()}, status_code=200)
+        return JSONResponse({"voice": True, "data": search_url, "message": message, "status": status, status_code=200)
 
     except Exception as e:
         print(f"Error: {e}")
