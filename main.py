@@ -57,8 +57,8 @@ async def musica(req: Req):
             status = 201
         
         
-
-        return JSONResponse({"voice": True, "data": search_url, "message": message, "status": status}, status_code=200)
+        videosSearch = VideosSearch(req.url, limit = 1)
+        return JSONResponse({"voice": True, "data": search_url, "message": message, "status": status, "extra_info": videosSearch.result()}, status_code=200)
 
     except Exception as e:
         print(f"Error: {e}")
