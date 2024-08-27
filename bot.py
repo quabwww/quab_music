@@ -57,7 +57,8 @@ class MusicBot(discord.Client):
             'format': 'bestaudio/best',
             'noplaylist': True,
             'quiet': True,
-            'cookies': 'cookies.txt'
+            'geo_bypass': True,  # Salta restricciones geográficas
+            'noprogress': True  # No muestra la barra de prog
         }
 
         try:
