@@ -5,3 +5,4 @@ yt_dlp
 discord.py
 python-dotenv
 pynacl
+youtube-search-python
