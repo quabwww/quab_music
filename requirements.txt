@@ -6,3 +6,4 @@ discord.py
 python-dotenv
 pynacl
 youtube-search-python
+uvicorn
