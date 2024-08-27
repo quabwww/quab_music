@@ -6,6 +6,8 @@ Obten el repositorio en tus manos.
    - Video tutorial [click aqui](https://github.com/IzanaonYT/MusicScript/blob/main/Tutos/githubtuto.mp4)
 - **Segundo Paso**
 Obten un Host Gratuito con un subdominio para que el bot funcione correctamente.
+Vamos usar [Railway.app](https://railway.app), recuerda inicar sesion con tu cuenta git hub
+
    - Video tutorial [click aqui](https://streamable.com/9qtqhr)
    
     No olvides poner la variable de entorno llamada "DISCORD_TOKEN" mas el el valor de tu token de tu bot.
