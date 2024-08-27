@@ -6,7 +6,7 @@ Obten el repositorio en tus manos.
    - Video tutorial [click aqui](https://github.com/IzanaonYT/MusicScript/blob/main/Tutos/githubtuto.mp4)
 - **Segundo Paso**
 Obten un Host Gratuito con un subdominio para que el bot funcione correctamente.
-   - Video tutorial [click aqui](https://github.com/IzanaonYT/MusicScript/blob/main/Tutos/rendertuto.mp4)
+   - Video tutorial [click aqui](https://streamable.com/9qtqhr)
    
     No olvides poner la variable de entorno llamada "DISCORD_TOKEN" mas el el valor de tu token de tu bot.
     Recuerda esperar que la API cargue correctamente o causaras problemas en el bot pero puedes reiniciar el proyecto con Deploy Latest Commit:
