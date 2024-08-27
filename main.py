@@ -8,6 +8,7 @@ import os
 import asyncio
 from Funcion.get import search_download_return_url
 from youtube_search import YoutubeSearch
+from youtubesearchpython import VideosSearch
 import json
 
 load_dotenv()
@@ -54,8 +55,10 @@ async def musica(req: Req):
         else:
             message = "Una canción ya está en reproducción. Se agregó la nueva canción a la lista."
             status = 201
+        
+        videosSearch = VideosSearch(req.url, limit = 2)
 
-        return JSONResponse({"voice": True, "data": search_url, "message": message, "status": status}, status_code=200)
+        return JSONResponse({"voice": True, "data": search_url, "message": message, "status": status, "info_extra": videosSearch.result()}, status_code=200)
 
     except Exception as e:
         print(f"Error: {e}")
@@ -83,5 +86,4 @@ async def o(music: str):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app=app, host="0.0.0.0", port=9000)
-
 
