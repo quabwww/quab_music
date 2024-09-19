@@ -1,5 +1,3 @@
-# bot.py
-
 import discord
 import yt_dlp
 
@@ -58,7 +56,7 @@ class MusicBot(discord.Client):
             'noplaylist': True,
             'quiet': True,
             'geo_bypass': True,  # Salta restricciones geográficas
-            'noprogress': True  # No muestra la barra de prog
+            'noprogress': True  # No muestra la barra de progreso
         }
 
         try:
@@ -82,14 +80,12 @@ class MusicBot(discord.Client):
             print(f"Error al configurar FFmpeg: {e}")
             return
 
-
     def is_playing(self, guild_id):
         guild = self.get_guild(guild_id)
         if not guild:
             return False
         voice_client = discord.utils.get(self.voice_clients, guild=guild)
         return voice_client.is_playing() if voice_client else False
-    
     
     def is_user_in_voice_channel(self, guild_id, user_id):
         guild = self.get_guild(guild_id)
@@ -104,6 +100,9 @@ class MusicBot(discord.Client):
     
     def get_pending_urls(self, guild_id):
         return self.queue.get(guild_id, [])
+
+
+
 
 
 
